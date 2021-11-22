@@ -1,0 +1,17 @@
+/* Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Abel&display=swap');
+/* Navbar styles */
+body {
+  font-family: 'Abel', sans-serif;
+  background: #fafafa;
+  color: #333333;
+  font-size: 1.2em;
+}
+
+.navbar {
+    -webkit-box-shadow: 0 8px 6px -6px #999;
+    -moz-box-shadow: 0 8px 6px -6px #999;
+    box-shadow: 0 8px 6px -6px #999;
+
+    /* the rest of your styling */
+}
