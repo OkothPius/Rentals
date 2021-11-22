@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "backend.apps.accounts",
     "backend.apps.core",
+    "crispy_forms",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -141,6 +142,7 @@ STATICFILES_FINDERS = (
     "django.contrib.staticfiles.finders.AppDirectoriesFinder",
 )
 
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # ==============================================================================
 # MEDIA FILES SETTINGS
