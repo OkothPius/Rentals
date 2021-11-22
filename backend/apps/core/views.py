@@ -4,6 +4,8 @@ from django.utils import timezone
 from django.shortcuts import render
 from django.views import generic
 from .models import Rental
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 def get_map(request):
     # ip_address = '41.212.89.70'
@@ -19,9 +21,11 @@ def get_map(request):
         'api_key': 'f4c594d1c7f2df990c601cb6cb46c9bf'
     })
 
-class HomeListView(generic.ListView):
+# @login_required
+class HomeListView(LoginRequiredMixin, generic.ListView):
     models = Rental
     template_name = 'core/index.html'
+    redirect_field_name = 'home'
     queryset = Rental.objects.all()
     paginate_by = 10
 
