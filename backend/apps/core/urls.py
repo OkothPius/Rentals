@@ -1,7 +1,8 @@
 from django.urls import path
 from . import views
-from django.views.generic  import TemplateView
+from .views import HomeListView
 
 urlpatterns = [
-    path('', views.home, name='home'),
+    path('', HomeListView.as_view(), name='home'),
+    path('geodata/', views.get_map, name='map'),
 ]
