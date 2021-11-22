@@ -35,7 +35,7 @@ class Sale(models.Model):
     price = models.IntegerField()
     house_detail = models.TextField()
     pub_date = models.DateTimeField('date published')
-    estate = models.CharField(max_length=100)
+    type = models.ForeignKey(Category, on_delete=models.CASCADE)
     location = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/')
 
