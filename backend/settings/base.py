@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "bootstrap_datepicker_plus",
     "backend.apps.accounts",
     "backend.apps.core",
     "crispy_forms",
@@ -141,6 +142,14 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+USE_THOUSAND_SEPARATOR = True
+
+THOUSAND_SEPARATOR=','
+
+DECIMAL_SEPARATOR='.'
+
+NUMBER_GROUPING=3
 
 LOCALE_PATHS = [BASE_DIR / "locale"]
 
