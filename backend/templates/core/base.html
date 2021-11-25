@@ -13,6 +13,14 @@
 
     <!-- Showcase -->
     <div class="px-3 mt-5">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="alert alert-{{ message.tags }}">
+            {{message}}
+          </div>
+        {% endfor %}
+      {% endif %}
+      
       {% block content %}{% endblock content %}
     </div>
 
