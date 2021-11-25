@@ -48,30 +48,30 @@ class HomeListView(LoginRequiredMixin, generic.ListView):
 
 class RentalCreateView(LoginRequiredMixin, CreateView):
     model = Rental
-    fields = ['name', 'rent', 'house_detail', 'pub_date', 'type', 'location', 'image']
+    fields = ['name', 'rent', 'house_detail', 'type', 'location', 'image']
 
 class RentalUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     success_message ='Your Post have been Updated!'
     model = Rental
-    fields = ['case', 'details', 'location', 'type', 'num_reported', 'attach_file']
+    fields = ['name', 'rent', 'house_detail', 'type', 'location', 'image']
 
-    #Uses the current user as the author of posts created
-    # def form_valid(self,form):
-    #     form.instance.author = self.request.user
-    #     return super().form_valid(form)
-    #
-    #
-    # def test_func(self):
-    #     log = self.get_object()
-    #     if self.request.user == log.author:
-    #         return True
+    # Uses the current user as the author of posts created
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+    def test_func(self):
+        rental = self.get_object()
+        if self.request.user == rental.author:
+            return True
 
 class RentalDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     success_message ='Your Post have been Deleted!'
     model = Rental
     success_url = '/'
 
-    # def test_func(self):
-    #     log = self.get_object()
-    #     if self.request.user == log.author:
-    #         return True
+    def test_func(self):
+        rental = self.get_object()
+        if self.request.user == rental.author:
+            return True
