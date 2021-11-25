@@ -1,3 +1,4 @@
+import os
 import environ
 from pathlib import Path
 
@@ -74,7 +75,7 @@ MIDDLEWARE = [
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"],
+        "DIRS": [os.path.join(BASE_DIR, 'templates')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -150,7 +151,8 @@ LOCALE_PATHS = [BASE_DIR / "locale"]
 
 STATIC_URL = "/static/"
 
-STATIC_ROOT = BASE_DIR.parent.parent / "static"
+# STATIC_ROOT = BASE_DIR.parent.parent / "static"
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 
@@ -165,9 +167,11 @@ CRISPY_TEMPLATE_PACK = 'bootstrap4'
 # MEDIA FILES SETTINGS
 # ==============================================================================
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 MEDIA_URL = "/media/"
 
-MEDIA_ROOT = BASE_DIR.parent.parent / "media"
+# MEDIA_ROOT = BASE_DIR.parent.parent / "media"
 
 
 # ==============================================================================
