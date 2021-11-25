@@ -3,9 +3,21 @@ from django.utils import timezone
 
 from django.shortcuts import render
 from django.views import generic
-from .models import Rental
+from django.contrib import messages
+
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.models import User
+from django.contrib.messages.views import SuccessMessageMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+
+from .models import Rental
+from django.views.generic import (
+                    ListView,
+                    CreateView,
+                    UpdateView,
+                    DetailView,
+                    DeleteView
+                    )
 
 def get_map(request):
     # ip_address = '41.212.89.70'
@@ -33,3 +45,33 @@ class HomeListView(LoginRequiredMixin, generic.ListView):
         context = super().get_context_data(**kwargs)
         context['now'] = timezone.now()
         return context
+
+class RentalCreateView(LoginRequiredMixin, CreateView):
+    model = Rental
+    fields = ['name', 'rent', 'house_detail', 'pub_date', 'type', 'location', 'image']
+
+class RentalUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+    success_message ='Your Post have been Updated!'
+    model = Rental
+    fields = ['case', 'details', 'location', 'type', 'num_reported', 'attach_file']
+
+    #Uses the current user as the author of posts created
+    # def form_valid(self,form):
+    #     form.instance.author = self.request.user
+    #     return super().form_valid(form)
+    #
+    #
+    # def test_func(self):
+    #     log = self.get_object()
+    #     if self.request.user == log.author:
+    #         return True
+
+class RentalDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+    success_message ='Your Post have been Deleted!'
+    model = Rental
+    success_url = '/'
+
+    # def test_func(self):
+    #     log = self.get_object()
+    #     if self.request.user == log.author:
+    #         return True
