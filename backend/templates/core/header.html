@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg bg-grey navbar-light py-3">
 
   <div class="container">
-    <a href="#" class="navbar-brand">Arexa</a>
+    <a href="{% url 'home' %}" class="navbar-brand">Arexa</a>
 
     <form class="d-flex flex-grow-1">
         <input class="form-control me-2 rounded-pill shadow-none" type="search" placeholder="Search for Rentals" aria-label="Search">
@@ -34,17 +34,20 @@
             <a href="#" class="nav-link"><i class="fa fa-bell"></i></a>
           </li>
           <li class="nav-item">
-            <a href="#" class="btn btn-light"><i class="fas fa-user"></i></a>
+            <a href="{% url 'profile' %}" class="btn btn-light"><i class="fas fa-user"></i></a>
+          </li>
+          <li>
+            <a href="{% url 'logout' %}" class="btn btn-light"><i class="fas fa-sign-out-alt"></i></a>
           </li>
         {% else %}
           <li class="nav-item">
-            <a href="#instructors" class="nav-link">Blog</a>
+            <a href="#" class="nav-link">Blog</a>
           </li>
           <li class="nav-item">
             <a href="{% url 'login' %}" class="btn btn-light">Login</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="btn btn-light">Register</a>
+            <a href="{% url 'register' %}" class="btn btn-light">Register</a>
           </li>
         {% endif %}
       </ul>
