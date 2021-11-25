@@ -17,6 +17,7 @@ class Rental(models.Model):
     house_detail = models.TextField()
     pub_date = models.DateTimeField('date published')
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/')
 
@@ -36,6 +37,7 @@ class Sale(models.Model):
     house_detail = models.TextField()
     pub_date = models.DateTimeField('date published')
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
+    author = models.ForeignKey(User, on_delete=models.CASCADE)
     location = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/')
 
