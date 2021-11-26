@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="showcase bg-blue mt-3">
+  {% for rent in rents %}
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card">
+        <img class="rounded" src="{{ rent.image }}" width="240px">
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</section>
+{% endblock content %}
