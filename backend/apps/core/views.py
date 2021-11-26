@@ -1,6 +1,7 @@
 import requests
 from django.utils import timezone
 
+from django.db.models import Q
 from django.shortcuts import render
 from django.views import generic
 from django.contrib import messages
@@ -11,6 +12,7 @@ from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 from .models import Rental
+from .render import Render
 from django.views.generic import (
                     ListView,
                     CreateView,
@@ -33,6 +35,12 @@ def get_map(request):
         'api_key': 'f4c594d1c7f2df990c601cb6cb46c9bf'
     })
 
+def display_list(request):
+    context = {
+        'rents': Rental.objects.all()
+    }
+    return render(request, 'core/display.html', context)
+
 # @login_required
 class HomeListView(LoginRequiredMixin, generic.ListView):
     models = Rental
@@ -49,6 +57,11 @@ class HomeListView(LoginRequiredMixin, generic.ListView):
 class RentalCreateView(LoginRequiredMixin, CreateView):
     model = Rental
     fields = ['name', 'rent', 'house_detail', 'type', 'location', 'image']
+
+    #Uses the current user as the author of posts created
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
 
 class RentalUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     success_message ='Your Post have been Updated!'
@@ -75,3 +88,33 @@ class RentalDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMi
         rental = self.get_object()
         if self.request.user == rental.author:
             return True
+
+#Search view
+class SearchView(generic.TemplateView):
+    template_name = 'core/search.html'
+    models = Rental
+
+    def get_queryset(self):
+        return Rental.objects.all()
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        kw = self.request.GET.get('keyword')
+        results = Rental.objects.filter(
+            Q(name__icontains=kw) | Q(location__icontains=kw) | Q(rent__icontains=kw))
+        print('results')
+        context['results'] = results
+        return context
+
+# Generating PDF file for each specific listing
+class PdfView(generic.TemplateView):
+
+    def get(self, request):
+        rental = Rental.objects.all()
+        today = timezone.now()
+        params = {
+            'today': today,
+            'rental': rental,
+            'request': request
+        }
+        return Render.render('core/pdf.html', params)
