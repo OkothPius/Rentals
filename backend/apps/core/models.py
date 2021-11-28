@@ -1,5 +1,6 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
 from django.contrib.auth.models import User
 
 class Category(models.Model):
@@ -17,7 +18,7 @@ class Rental(models.Model):
     house_detail = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     location = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/')
 
@@ -37,7 +38,7 @@ class Sale(models.Model):
     house_detail = models.TextField()
     pub_date = models.DateTimeField(auto_now_add=True)
     type = models.ForeignKey(Category, on_delete=models.CASCADE)
-    author = models.ForeignKey(User, on_delete=models.CASCADE)
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     location = models.CharField(max_length=100)
     image = models.ImageField(upload_to='images/')
 
