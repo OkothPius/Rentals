@@ -5,6 +5,8 @@ from django.db.models import Q
 from django.shortcuts import render
 from django.views import generic
 from django.contrib import messages
+from mapbox import Directions
+
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -21,19 +23,6 @@ from django.views.generic import (
                     DeleteView
                     )
 
-def get_map(request):
-    # ip_address = '41.212.89.70'
-    api_key = 'f4c594d1c7f2df990c601cb6cb46c9bf'
-    # base_url = 'response/ip_address?access_key=ip_key'
-    response = requests.get('http://api.ipstack.com/41.212.89.70?access_key=f4c594d1c7f2df990c601cb6cb46c9bf')
-    geodata = response.json()
-    return render(request, 'core/map.html', {
-        'ip': geodata['ip'],
-        'country': geodata['country_name'],
-        'latitude': geodata['latitude'],
-        'longitude': geodata['longitude'],
-        'api_key': 'f4c594d1c7f2df990c601cb6cb46c9bf'
-    })
 
 # @login_required
 class HomeListView(generic.ListView):
@@ -112,3 +101,9 @@ class PdfView(generic.TemplateView):
             'request': request
         }
         return Render.render('core/pdf.html', params)
+
+def default_maps(request):
+	# TODO: move Token to settings.py file
+	mapbox_access_token = 'pk.eyJ1Ijoib3J1a28iLCJhIjoiY2t3ajBjZmthMHhuYzJwbWRuOGtucmoxMSJ9.yroz5quTvncPl238zBe_tA'
+
+	return render(request, 'core/map.html', {'mapbox_access_token':mapbox_access_token})
