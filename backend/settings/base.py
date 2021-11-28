@@ -186,12 +186,13 @@ MEDIA_URL = "/media/"
 # ==============================================================================
 # THIRD-PARTY SETTINGS
 # ==============================================================================
-LOGIN_URL = 'login'
-LOGOUT_URL = 'logout'
-LOGIN_REDIRECT_URL = 'home'
+# LOGIN_URL = 'login'
+# LOGOUT_URL = 'logout'
+# LOGIN_REDIRECT_URL = 'home'
 
 SOCIAL_AUTH_GITHUB_KEY = '3021786cc75de7b2eb75'
 SOCIAL_AUTH_GITHUB_SECRET = '36390c9b438fd5d7134c4bd8b0593035a68455f7'
+AUTH_USER_MODEL = 'accounts.User'
 
 # ==============================================================================
 # FIRST-PARTY SETTINGS
