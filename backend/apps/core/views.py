@@ -35,14 +35,8 @@ def get_map(request):
         'api_key': 'f4c594d1c7f2df990c601cb6cb46c9bf'
     })
 
-def display_list(request):
-    context = {
-        'rents': Rental.objects.all()
-    }
-    return render(request, 'core/display.html', context)
-
 # @login_required
-class HomeListView(LoginRequiredMixin, generic.ListView):
+class HomeListView(generic.ListView):
     models = Rental
     template_name = 'core/index.html'
     redirect_field_name = 'home'
@@ -54,7 +48,7 @@ class HomeListView(LoginRequiredMixin, generic.ListView):
         context['now'] = timezone.now()
         return context
 
-class RentalCreateView(LoginRequiredMixin, CreateView):
+class RentalCreateView(CreateView):
     model = Rental
     fields = ['name', 'rent', 'house_detail', 'type', 'location', 'image']
 
@@ -63,7 +57,7 @@ class RentalCreateView(LoginRequiredMixin, CreateView):
         form.instance.author = self.request.user
         return super().form_valid(form)
 
-class RentalUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+class RentalUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     success_message ='Your Post have been Updated!'
     model = Rental
     fields = ['name', 'rent', 'house_detail', 'type', 'location', 'image']
@@ -79,7 +73,7 @@ class RentalUpdateView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMi
         if self.request.user == rental.author:
             return True
 
-class RentalDeleteView(LoginRequiredMixin, UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+class RentalDeleteView(UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     success_message ='Your Post have been Deleted!'
     model = Rental
     success_url = '/'
