@@ -1,13 +1,20 @@
 from django.db import models
-from django.contrib.auth.models import User
+from django.contrib.auth.models import AbstractUser
 from PIL import Image
 
-class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    image = models.ImageField(upload_to='profile_pics')
+class User(AbstractUser):
+    """docstring for User."""
+    is_agent = models.BooleanField('Is Agent', default=False)
+    is_user = models.BooleanField('Is User', default=False)
+    is_agency = models.BooleanField('Is Agency', default=False)
 
-    def __str__(self):
-        return f'{self.user.username} profile'
+
+# class Profile(models.Model):
+#     user = models.OneToOneField(User, on_delete=models.CASCADE)
+#     image = models.ImageField(upload_to='profile_pics')
+#
+#     def __str__(self):
+#         return f'{self.user.username} profile'
 
     # def save(self, *args, **kwargs):
     #     super().save(*args, **kwargs)
