@@ -30,6 +30,7 @@ class RentalListView(generic.ListView):
     template_name = 'core/index.html'
     redirect_field_name = 'home'
     queryset = Rental.objects.all()
+    context_object_name = 'rentals'
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
@@ -80,6 +81,7 @@ class SaleListView(generic.ListView):
     template_name = 'core/sale.html'
     redirect_field_name = 'home'
     queryset = Sale.objects.all()
+    context_object_name = 'sales'
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
