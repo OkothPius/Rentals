@@ -1,0 +1,56 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h2 class="text-center">Houses for Sale, Nairobi</h2>
+
+<section class="showcase bg-blue mt-3">
+
+  <div class="row">
+    <div class="col-md-10">
+    </div>
+
+      <div class="col-md">
+        <a href="{% url 'sale-create' %}" class="btn btn-primary float-left"><i class="fas fa-plus-circle"></i> Create</a>
+      </div>
+
+    <div class="col-md">
+      <a href="{% url 'download' %}" class="btn btn-success float-right"><i class="fas fa-download"></i> Download</a>
+    </div>
+  </div>
+
+  <table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Price</th>
+      <th scope="col">Published Date</th>
+      <th scope="col">Type</th>
+      <th scope="col">Location</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  {% for house in houses %}
+    <tbody>
+      <tr>
+        <th scope="row">{{page_obj.start_index|add:forloop.counter0}}</th>
+        <td>{{house.name}}</td>
+        <td>Kshs.{{house.rent}}</td>
+        <td>{{house.pub_date}}</td>
+        <td>{{house.type}}</td>
+        <td>{{house.location}}</td>
+
+        <td>
+          <a class="btn btn-primary btn-sm mt-1 mb-1"href="{% url 'sale-update' house.id %}"><i class="fas fa-pen"></i> Update</a>
+          <a class="btn btn-danger btn-sm mt-1 mb-1"href="{% url 'sale-delete' house.id %}"><i class="fas fa-trash-alt"></i> Delete</a>
+        </td>
+      </tr>
+    {% empty %}
+      <tr>
+        <td colspan="7" class="text-center bg-warning">No Houses Updated Yet!</td>
+      </tr>
+    </tbody>
+  {% endfor %}
+</table>
+</section>
+{% endblock content %}
