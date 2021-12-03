@@ -2,7 +2,7 @@
 <nav class="navbar navbar-expand-lg bg-grey navbar-light py-3">
 
   <div class="container">
-    <a href="{% url 'home' %}" class="navbar-brand">Arexa</a>
+    <a href="{% url 'rental' %}" class="navbar-brand">Arexa</a>
 
     <form class="d-flex flex-grow-1" action="{% url 'search' %}" method="get">
         <input class="form-control me-2 rounded-pill shadow-none" type="text" name="keyword" placeholder="Search for Rentals" required>
@@ -24,10 +24,10 @@
             <a href="{% url 'map'%}" class="nav-link"><i class="fas fa-map-marker-alt"></i> Map</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Buy</a>
+            <a href="{% url 'sale' %}" class="nav-link">Buy</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link">Rent</a>
+            <a href="{% url 'rental' %}" class="nav-link">Rent</a>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link"><i class="fa fa-heart"></i></a>
