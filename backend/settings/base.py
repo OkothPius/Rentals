@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "bootstrap_datepicker_plus",
     "backend.apps.accounts",
     "backend.apps.core",
+    "backend.apps.invoice",
     "crispy_forms",
     "social_django",
 ]
