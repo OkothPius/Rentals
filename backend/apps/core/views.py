@@ -13,7 +13,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from .models import Rental
+from .models import Rental, Sale
 from .render import Render
 from django.views.generic import (
                     ListView,
@@ -25,7 +25,7 @@ from django.views.generic import (
 
 
 # @login_required
-class HomeListView(generic.ListView):
+class RentalListView(generic.ListView):
     models = Rental
     template_name = 'core/index.html'
     redirect_field_name = 'home'
@@ -38,6 +38,9 @@ class HomeListView(generic.ListView):
         return context
 
 class RentalCreateView(CreateView):
+    """
+    Create View for Sale Model.
+    """
     model = Rental
     fields = ['name', 'rent', 'house_detail', 'type', 'location', 'image']
 
@@ -65,6 +68,57 @@ class RentalUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
 class RentalDeleteView(UserPassesTestMixin, SuccessMessageMixin, DeleteView):
     success_message ='Your Post have been Deleted!'
     model = Rental
+    success_url = '/'
+
+    def test_func(self):
+        rental = self.get_object()
+        if self.request.user == rental.author:
+            return True
+
+class SaleListView(generic.ListView):
+    models = Sale
+    template_name = 'core/sale.html'
+    redirect_field_name = 'home'
+    queryset = Sale.objects.all()
+    paginate_by = 10
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['now'] = timezone.now()
+        return context
+
+
+class SaleCreateView(CreateView):
+    """
+    Create View for Sale Model.
+    """
+    model = Sale
+    fields = ['name', 'price', 'house_detail', 'type', 'location', 'image']
+
+    #Uses the current user as the author of posts created
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+class SaleUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
+    success_message ='Your Post have been Updated!'
+    model = Sale
+    fields = ['name', 'price', 'house_detail', 'type', 'location', 'image']
+
+    # Uses the current user as the author of posts created
+    def form_valid(self,form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
+    def test_func(self):
+        rental = self.get_object()
+        if self.request.user == rental.author:
+            return True
+
+class SaleDeleteView(UserPassesTestMixin, SuccessMessageMixin, DeleteView):
+    success_message ='Your Post have been Deleted!'
+    model = Sale
     success_url = '/'
 
     def test_func(self):
