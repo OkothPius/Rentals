@@ -13,6 +13,7 @@ class InvoiceListView(View):
         context = {
             "invoices":invoices,
         }
+        
 
         return render(self.request, 'invoice/invoice-list.html', context)
 
