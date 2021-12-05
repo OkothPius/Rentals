@@ -167,7 +167,7 @@ def default_maps(request):
 
 	return render(request, 'core/map.html', {'mapbox_access_token':mapbox_access_token})
 
-
+#Rental Download
 def view_PDF(request):
     rental = Rental.objects.all()
 
@@ -188,5 +188,29 @@ def generate_PDF(request):
     pdf = pdfkit.from_url(request.build_absolute_uri(reverse('rental-detail')), False)
     response = HttpResponse(pdf,content_type='application/pdf')
     response['Content-Disposition'] = 'attachment; filename="rental.pdf"'
+
+    return response
+
+#Sale Download
+def sale_PDF(request):
+    sale = Sale.objects.all()
+
+    context = {
+        "company": {
+            "name": "Arexa Rental Services",
+            "address" :"67542 Westlands, Dunham Towers, Kenya",
+            "phone": "(254) XXX XXXX",
+            "email": "contact@arexa.com",
+        },
+        'sale':sale,
+
+    }
+    return render(request, 'core/sale_pdf_template.html', context)
+
+def sale_generate_PDF(request):
+    # Use False instead of output path to save pdf to a variable
+    pdf = pdfkit.from_url(request.build_absolute_uri(reverse('sale-detail')), False)
+    response = HttpResponse(pdf,content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="sale.pdf"'
 
     return response
