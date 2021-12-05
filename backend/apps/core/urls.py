@@ -13,6 +13,8 @@ from .views import (
             PdfView,
             view_PDF,
             generate_PDF,
+            sale_PDF,
+            sale_generate_PDF,
             )
 
 urlpatterns = [
@@ -30,4 +32,6 @@ urlpatterns = [
     path('rental-detail/', view_PDF, name='rental-detail'),
     path('rental-download/', generate_PDF, name='rental-download'),
     path('download/', PdfView.as_view(), name='download'),
+    path('sale-download/', sale_generate_PDF, name='sale-download'),
+    path('sale-detail/', sale_PDF, name='sale-detail'),
 ]
