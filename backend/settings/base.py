@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "backend.apps.invoice",
     "crispy_forms",
     "social_django",
+    "bulma",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
