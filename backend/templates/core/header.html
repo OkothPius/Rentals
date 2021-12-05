@@ -1,6 +1,11 @@
 <!-- Navbar -->
+{% load static %}
 <nav class="navbar navbar-expand-lg bg-grey navbar-light py-3">
 
+  <!-- <div id="logo">
+    <img src="{% static 'img/logo.png'%}" style="width: 134px; height:10px">
+  </div> -->
+  <br>
   <div class="container">
     <a href="{% url 'rental' %}" class="navbar-brand">Arexa</a>
 
@@ -33,7 +38,7 @@
             <a href="#" class="nav-link"><i class="fa fa-heart"></i></a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="fa fa-bell"></i></a>
+            <a href="{% url 'invoice:invoice-create' %}" class="nav-link"><i class="fa fa-bell"></i></a>
           </li>
           <li class="nav-item">
             <a href="#" class="btn btn-light"><i class="fas fa-user"></i></a>
