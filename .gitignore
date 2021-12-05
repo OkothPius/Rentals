@@ -61,6 +61,7 @@ htmlcov/
 .coverage
 .coverage.*
 .cache
+.wkhtmltox_0.12.6-1.focal_amd64.deb
 nosetests.xml
 coverage.xml
 *.cover
@@ -125,6 +126,7 @@ venv/
 ENV/
 env.bak/
 venv.bak/
+wkhtmltox_0.12.6-1.focal_amd64.deb/
 
 # Spyder project settings
 .spyderproject
