@@ -35,24 +35,21 @@
             <a href="{% url 'rental' %}" class="nav-link">Rent</a>
           </li>
           <li class="nav-item">
-            <a href="#" class="nav-link"><i class="fa fa-heart"></i></a>
+            <a href="{% url 'invoice:invoice-list' %}" class="nav-link"><i class="fa fa-heart"></i></a>
           </li>
-          <li class="nav-item">
-            <a href="{% url 'invoice:invoice-create' %}" class="nav-link"><i class="fa fa-bell"></i></a>
-          </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
+            <a href="{% url 'invoice:invoice-list' %}" class="nav-link"><i class="fa fa-bell"></i></a>
+          </li> -->
+          <li class="nav-item px-2">
             <a href="#" class="btn btn-light"><i class="fas fa-user"></i></a>
           </li>
-          <li>
+          <li class="nav-item px-2">
             <a href="#" class="btn btn-light"><i class="fas fa-sign-out-alt"></i></a>
           </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">Blog</a>
-          </li>
-          <li class="nav-item">
+          <li class="nav-item px-2">
             <a href="#" class="btn btn-light">Login</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item px-2">
             <a href="#" class="btn btn-light">Register</a>
           </li>
       </ul>
