@@ -11,6 +11,8 @@ from .views import (
             SaleDeleteView,
             SearchView,
             PdfView,
+            view_PDF,
+            generate_PDF,
             )
 
 urlpatterns = [
@@ -25,5 +27,7 @@ urlpatterns = [
     path('sale/<int:pk>/update/', SaleUpdateView.as_view(), name='sale-update'),
     path('sale/<int:pk>/delete/', SaleDeleteView.as_view(), name='sale-delete'),
     path('search/', SearchView.as_view(), name='search'),
+    path('rental-detail/', view_PDF, name='rental-detail'),
+    path('rental-download/', generate_PDF, name='rental-download'),
     path('download/', PdfView.as_view(), name='download'),
 ]
