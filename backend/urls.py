@@ -10,6 +10,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('backend.apps.core.urls')),
+    path('invoice/', include('backend.apps.invoice.urls')),
+
 ]
 
 if settings.DEBUG:
