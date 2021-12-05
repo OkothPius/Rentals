@@ -2,10 +2,12 @@ import requests
 from django.utils import timezone
 
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views import generic
 from django.contrib import messages
 from mapbox import Directions
+from django.http import HttpResponse
+
 
 
 from django.contrib.auth.decorators import login_required
@@ -22,6 +24,7 @@ from django.views.generic import (
                     DetailView,
                     DeleteView
                     )
+import pdfkit
 
 
 # @login_required
@@ -163,3 +166,27 @@ def default_maps(request):
 	mapbox_access_token = 'pk.eyJ1Ijoib3J1a28iLCJhIjoiY2t3ajBjZmthMHhuYzJwbWRuOGtucmoxMSJ9.yroz5quTvncPl238zBe_tA'
 
 	return render(request, 'core/map.html', {'mapbox_access_token':mapbox_access_token})
+
+
+def view_PDF(request):
+    rental = Rental.objects.all()
+
+    context = {
+        "company": {
+            "name": "Arexa Rental Services",
+            "address" :"67542 Westlands, Dunham Towers, Kenya",
+            "phone": "(254) XXX XXXX",
+            "email": "contact@arexa.com",
+        },
+        'rental':rental,
+
+    }
+    return render(request, 'core/pdf_template.html', context)
+
+def generate_PDF(request):
+    # Use False instead of output path to save pdf to a variable
+    pdf = pdfkit.from_url(request.build_absolute_uri(reverse('rental-detail')), False)
+    response = HttpResponse(pdf,content_type='application/pdf')
+    response['Content-Disposition'] = 'attachment; filename="rental.pdf"'
+
+    return response
