@@ -12,12 +12,8 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('backend.apps.core.urls')),
+    path('accounts/', include('backend.apps.accounts.urls')),
     path('invoice/', include('backend.apps.invoice.urls')),
-    # path('invoice-list/', InvoiceListView.as_view(), name="invoice-list"),
-    # path('create/', createInvoice, name="invoice-create"),
-    # path('invoice-detail/<id>', view_PDF, name='invoice-detail'),
-    # path('invoice-download/<id>', generate_PDF, name='invoice-download'),
-
 ]
 
 if settings.DEBUG:
