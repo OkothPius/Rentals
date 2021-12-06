@@ -1,0 +1,26 @@
+{% extends 'core/base.html' %}{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <img src="https://mdbootstrap.com/img/Photos/new-templates/bootstrap-registration/img3.jpg" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
+          <div class="card-body p-4 p-md-5">
+            <h1 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Registration Info</h1>
+
+            <form class="px-md-2" method="post">
+              {% csrf_token %}
+              {{ form | crispy}}
+              <input class="mt-4 btn btn-success btn-lg mb-1 text-center" type="Submit" name="submit" value="SignUp">
+              <!-- <button type="submit" class="btn btn-success btn-lg mb-1">Submit</button> -->
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

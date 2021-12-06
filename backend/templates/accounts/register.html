@@ -1,61 +1,30 @@
-{% extends 'core/base.html' %}
+{% extends 'core/base.html' %}{% load static %}
 {% block content %}
-<div class="content">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-6 contents">
-        <div class="row justify-content-center">
-          <div class="col-md-12">
-            <div class="form-block">
-                <div class="mb-4">
-                    <h1>User Registration page</h1>
-              </div>
-                <span class="mb-0 text-muted">
-              {% if msg %}
-                  {{ msg | safe }}
-              {% else %}
-                  Login page
-              {% endif %}
-            </span>
-              <form  method="post">
-                  {% csrf_token %}
-                <div class="form-group first">
-                  <label for="username">Username</label>
-                    {{ form.username }}
-                </div>
-                <div class="form-group first">
-                  <label for="email">Email</label>
-                    {{ form.email}}
-                </div>
-                <div class="form-group last mb-4">
-                  <label for="password">Password</label>
-                    {{ form.password1 }}
-                </div>
-                <div class="form-group last mb-4">
-                  <label for="password">confirm Password</label>
-                    {{ form.password2 }}
-                </div>
-                <div class="d-flex mb-5 align-items-center">
-                  <label class="control control--checkbox mb-0"><span class="caption">Agent</span>
-                      {{ form.is_agent }}
-                    <div class="control__indicator"></div>
-                  </label>
-                </div>
-                <div class="d-flex mb-5 align-items-center">
-                  <label class="control control--checkbox mb-0"><span class="caption">User</span>
-                      {{ form.is_user }}
-                    <div class="control__indicator"></div>
-                  </label>
-                </div>
-                  <span class="text-error">{{ form.errors }}</span>
-                <input type="submit"  value="Register" class="btn btn-pill text-white btn-block btn-primary">
-              </form>
+<!-- <div class="container">
+  <div class="card">
+      <h1 class="text-center">Rgister from Here!</h1>
+      <button type="" class="btn btn-primary" name="button"><a href="#">Agent SignUp</a></button>
+      <button type="" class="btn btn-success" name="button"><a href="{% url 'tenant_signup' %}">Tenant SignUp</a></button>
+  </div>
+</div> -->
+
+
+<section class="h-100 h-custom" style="background-color: #8fc4b7;">
+  <div class="container py-5 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-100">
+      <div class="col-lg-8 col-xl-6">
+        <div class="card rounded-3">
+          <img src="{% static 'img/logo.png'%}" style="width: 100px; height:300px" class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;" alt="Sample photo">
+          <div class="card-body p-4 p-md-5">
+            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2 text-center">Registration Info</h3>
+            <div class="text-center">
+              <button type="button" class="btn btn-secondary"><a href="{% url 'agent_signup' %}">Agent SignUp</a></button>
+              <button type="button" class="btn btn-danger"><a href="{% url 'tenant_signup' %}">Tenant SignUp</a></button>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
-</div>
+</section>
 {% endblock %}

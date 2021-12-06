@@ -25,6 +25,7 @@
 
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
+        {% if user.is_authenticated %}
           <li class="nav-item">
             <a href="{% url 'map'%}" class="nav-link"><i class="fas fa-map-marker-alt"></i> Map</a>
           </li>
@@ -37,21 +38,20 @@
           <li class="nav-item">
             <a href="{% url 'invoice:invoice-list' %}" class="nav-link"><i class="fa fa-heart"></i></a>
           </li>
-          <!-- <li class="nav-item">
-            <a href="{% url 'invoice:invoice-list' %}" class="nav-link"><i class="fa fa-bell"></i></a>
-          </li> -->
           <li class="nav-item px-2">
-            <a href="#" class="btn btn-light"><i class="fas fa-user"></i></a>
+            <a href="{% url 'profile' %}" class="btn btn-light"><i class="fas fa-user"></i></a>
           </li>
           <li class="nav-item px-2">
-            <a href="#" class="btn btn-light"><i class="fas fa-sign-out-alt"></i></a>
+            <a href="{% url 'logout' %}" class="btn btn-light"><i class="fas fa-sign-out-alt"></i></a>
           </li>
+        {% else %}
           <li class="nav-item px-2">
             <a href="#" class="btn btn-light">Login</a>
           </li>
           <li class="nav-item px-2">
-            <a href="#" class="btn btn-light">Register</a>
+            <a href="{% url 'register'%}" class="btn btn-light">Register</a>
           </li>
+        {% endif %}
       </ul>
     </div>
   </div>
