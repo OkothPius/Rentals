@@ -44,10 +44,9 @@ INTERNAL_IPS = ["127.0.0.1"]
 # AUTHENTICATION_BACKENDS
 # ==============================================================================
 AUTHENTICATION_BACKENDS = (
-    'social_core.backends.github.GithubOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
-    'social_core.backends.facebook.FacebookOAuth2',
-
+    # 'social_core.backends.github.GithubOAuth2',
+    # 'social_core.backends.twitter.TwitterOAuth',
+    # 'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -191,6 +190,7 @@ MEDIA_URL = "/media/"
 # LOGIN_URL = 'login'
 # LOGOUT_URL = 'logout'
 # LOGIN_REDIRECT_URL = 'home'
+# AUTH_USER_MODEL='backend.apps.accounts.User'
 
 SOCIAL_AUTH_GITHUB_KEY = '3021786cc75de7b2eb75'
 SOCIAL_AUTH_GITHUB_SECRET = '36390c9b438fd5d7134c4bd8b0593035a68455f7'
