@@ -7,13 +7,17 @@ from .forms import LineItemFormset, InvoiceForm
 
 import pdfkit
 
+from .filters import InvoiceFilter
+
 class InvoiceListView(View):
     def get(self, *args, **kwargs):
         invoices = Invoice.objects.all()
+        myFilter = InvoiceFilter(self.request.GET, queryset=invoices)
+        invoices = myFilter.qs
         context = {
-            "invoices":invoices,
+            "invoices":invoices, "myFilter":myFilter,
         }
-        
+
 
         return render(self.request, 'invoice/invoice-list.html', context)
 
@@ -31,6 +35,18 @@ class InvoiceListView(View):
             invoices.update(status=True)
 
         return redirect('invoice:invoice-list')
+
+    # def get_queryset(self):
+    #     queryset = super().get_queryset()
+    #     myFilter = InvoiceFilter(self.request.GET, queryset)
+    #     return myFilter.qs
+    #
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     queryset = self.get_queryset()
+    #     myFilter = InvoiceFilter(self.request.GET, queryset)
+    #     context["myFilter"] = myFilter
+    #     return context
 
 def createInvoice(request):
     """
