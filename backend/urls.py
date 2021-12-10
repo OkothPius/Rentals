@@ -7,8 +7,6 @@ from django.conf import settings
 from django.conf.urls.static import static
 # from backend.apps.invoice.views import InvoiceListView, createInvoice, generate_PDF, view_PDF
 
-
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('backend.apps.core.urls')),
