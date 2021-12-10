@@ -32,6 +32,8 @@ INSTALLED_APPS = [
     "crispy_forms",
     "social_django",
     "bulma",
+
+    "django_filters",
 ]
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
