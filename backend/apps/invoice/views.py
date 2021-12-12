@@ -36,18 +36,6 @@ class InvoiceListView(View):
 
         return redirect('invoice:invoice-list')
 
-    # def get_queryset(self):
-    #     queryset = super().get_queryset()
-    #     myFilter = InvoiceFilter(self.request.GET, queryset)
-    #     return myFilter.qs
-    #
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     queryset = self.get_queryset()
-    #     myFilter = InvoiceFilter(self.request.GET, queryset)
-    #     context["myFilter"] = myFilter
-    #     return context
-
 def createInvoice(request):
     """
     Invoice Generator page it will have Functionality to create new invoices,
@@ -97,7 +85,7 @@ def createInvoice(request):
                 generate_PDF(request, id=invoice.id)
             except Exception as e:
                 print(f"********{e}********")
-            return redirect('/')
+            return redirect('invoice:invoice-list')
     context = {
         "title" : "Invoice Generator",
         "formset": formset,
