@@ -10,6 +10,9 @@ from .forms import TenantSignUpForm, AgentSignUpForm, UserUpdateForm
 
 
 
+def register(request):
+    return render(request, 'accounts/register.html')
+    
 def login_form(request):
 	return render(request, 'accounts/login.html')
 
@@ -28,7 +31,7 @@ def loginView(request):
 				return redirect('dashboard')
 			elif user.is_agent:
 			    return redirect('agent_dashboard')
-			elif user.is_learner:
+			elif user.is_tenant:
 			    return redirect('tenant_dashboard')
 			else:
 			    return redirect('login_form')
@@ -48,7 +51,7 @@ class TenantSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect('tenant_dashboard')
 
 class AgentSignUpView(CreateView):
     model = User
@@ -56,62 +59,14 @@ class AgentSignUpView(CreateView):
     template_name = 'accounts/signup.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'tenant'
+        kwargs['user_type'] = 'agent'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('home')
+        return redirect('agent_dashboard')
 
-def register(request):
-    return render(request, 'accounts/register.html')
-
-
-# class TenantSignUpView(CreateView):
-#     model = User
-#     form_class = TenantSignUpForm
-#     template_name = 'accounts/signup.html'
-#
-#     def get_context_data(self, **kwargs):
-#         kwargs['user_type'] = 'tenant'
-#         return super().get_context_data(**kwargs)
-#
-#     def form_valid(self, form):
-#         user = form.save()
-#         login(self.request, user)
-#         return redirect('rental')
-#
-#
-# class AgentSignUpView(CreateView):
-#     model = User
-#     form_class = AgentSignUpForm
-#     template_name = 'accounts/signup.html'
-#
-#     def get_context_data(self, **kwargs):
-#         kwargs['user_type'] = 'agent'
-#         return super().get_context_data(**kwargs)
-#
-#     def form_valid(self, form):
-#         user = form.save()
-#         # login(self.request, user)
-#         return redirect('rental')
-
-
-# def register(request):
-#     if request.method == 'POST':
-#         form = UserRegisterForm(request.POST)
-#         if form.is_valid():
-#             form.save()
-#             username = form.cleaned_data.get('username')
-#             messages.success(request, f'Account created for {username} Log In to Proceed!')
-#             return redirect('login')
-#     else:
-#         form = UserRegisterForm()
-#     context = {'form':form}
-#     return render(request, 'accounts/register.html', context)
-#
-#
 @login_required
 def profile(request):
     if request.method == 'POST':
