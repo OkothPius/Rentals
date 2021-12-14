@@ -18,13 +18,11 @@ from .views import (
             )
 
 urlpatterns = [
-
-    #Authentication
-
     #Agent URLS
 
     #Tenant URLS
     path('tenant_home', views.home_tenant, name='tenant_dashboard'),
+    path('home/', views.home, name='home'),
 
     #Rental CRUD operations
     path('', RentalListView.as_view(), name='agent_dashboard'),
