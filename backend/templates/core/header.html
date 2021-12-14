@@ -7,7 +7,7 @@
   </div> -->
   <br>
   <div class="container">
-    <a href="{% url 'rental' %}" class="navbar-brand">Arexa</a>
+    <a href="{% url 'agent_dashboard' %}" class="navbar-brand">Arexa</a>
 
     <form class="d-flex flex-grow-1" action="{% url 'search' %}" method="get">
         <input class="form-control me-2 rounded-pill shadow-none" type="text" name="keyword" placeholder="Search for Rentals" required>
@@ -33,7 +33,7 @@
             <a href="{% url 'sale' %}" class="nav-link">Buy</a>
           </li>
           <li class="nav-item">
-            <a href="{% url 'rental' %}" class="nav-link">Rent</a>
+            <a href="{% url 'agent_dashboard' %}" class="nav-link">Rent</a>
           </li>
           <li class="nav-item">
             <a href="{% url 'invoice:invoice-list' %}" class="nav-link"><i class="fa fa-heart"></i></a>
