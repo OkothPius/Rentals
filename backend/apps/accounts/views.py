@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-# from . forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
+from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView
 
@@ -64,10 +64,10 @@ class AgentSignUpView(CreateView):
         login(self.request, user)
         return redirect('home')
 
-# def register(request):
-#     return render(request, 'accounts/register.html')
-#
-#
+def register(request):
+    return render(request, 'accounts/register.html')
+
+
 # class TenantSignUpView(CreateView):
 #     model = User
 #     form_class = TenantSignUpForm
