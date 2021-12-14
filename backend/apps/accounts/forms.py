@@ -29,8 +29,8 @@ class TenantSignUpForm(UserCreationForm):
 
 class AgentSignUpForm(UserCreationForm):
     email = forms.EmailField(required=True)
-    phone = forms.CharField(max_length=200)
-    designation = forms.CharField(max_length=200)
+    # phone = forms.CharField(max_length=200)
+    # designation = forms.CharField(max_length=200)
 
     class Meta(UserCreationForm.Meta):
         model = User
@@ -42,10 +42,10 @@ class AgentSignUpForm(UserCreationForm):
         user.is_agent = True
         user.save()
         agent = Agent.objects.create(user=user)
-        agent.phone = self.cleaned_data.get('phone')
-        agent.designation = self.cleaned_data.get('designation')
+        # agent.phone = self.cleaned_data.get('phone')
+        # agent.designation = self.cleaned_data.get('designation')
 
 
-        agent.save()
+        # agent.save()
 
-        return agent
+        return user

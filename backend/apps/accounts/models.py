@@ -19,7 +19,6 @@ class Agent(models.Model):
     phone = models.CharField(max_length=200)
     designation = models.CharField(max_length=200)
 
-
     def __str__(self):
         return self.user.username
 
@@ -29,15 +28,3 @@ class Profile(models.Model):
 
     def __str__(self):
         return f'{self.user.username} profile'
-
-    # def save(self, *args, **kwargs):
-    #     super().save(*args, **kwargs)
-    #
-    #     img = Image.open(self.image.path)
-    #
-    #     if img.height > 300 or img.width > 300:
-    #         output_size = (300, 300)
-    #         img.thumbnail(output_size)
-    #         img.save(self.image.path)
-
-# default='default.jpg',
