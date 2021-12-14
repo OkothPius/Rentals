@@ -30,7 +30,7 @@ class Rental(models.Model):
 
         # Handles redirect
     def get_absolute_url(self):
-        return reverse('rental')
+        return reverse('agent_dashboard')
 
 class Sale(models.Model):
     name = models.CharField(max_length=100)
@@ -50,7 +50,7 @@ class Sale(models.Model):
 
         # Handles redirect
     def get_absolute_url(self):
-        return reverse('rental')
+        return reverse('agent_dashboard')
 
 class Message(models.Model):
     text = models.CharField(max_length=200)
