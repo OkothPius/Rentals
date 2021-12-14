@@ -7,7 +7,7 @@
   </div> -->
   <br>
   <div class="container">
-    <a href="{% url 'agent_dashboard' %}" class="navbar-brand">Arexa</a>
+    <a class="navbar-brand text-brand" href="{% url 'home' %}">Arexa<span class="color-b">Rentals</span></a>
 
     <form class="d-flex flex-grow-1" action="{% url 'search' %}" method="get">
         <input class="form-control me-2 rounded-pill shadow-none" type="text" name="keyword" placeholder="Search for Rentals" required>
@@ -46,7 +46,7 @@
           </li>
         {% else %}
           <li class="nav-item px-2">
-            <a href="#" class="btn btn-light">Login</a>
+            <a href="{% url 'login'%}" class="btn btn-light">Login</a>
           </li>
           <li class="nav-item px-2">
             <a href="{% url 'register'%}" class="btn btn-light">Register</a>
