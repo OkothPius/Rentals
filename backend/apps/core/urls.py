@@ -3,6 +3,7 @@ from . import views
 from .views import (
             RentalListView,
             SaleListView,
+            MessageCreateView,
             RentalCreateView,
             RentalUpdateView,
             RentalDeleteView,
@@ -29,6 +30,9 @@ urlpatterns = [
     path('rental/new/', RentalCreateView.as_view(), name='rental-create'),
     path('rental/<int:pk>/update/', RentalUpdateView.as_view(), name='rental-update'),
     path('rental/<int:pk>/delete/', RentalDeleteView.as_view(), name='rental-delete'),
+
+    #Message
+    path('message/', MessageCreateView.as_view(), name='message'),
 
     #Sale CRUD operations
     path('sale/', SaleListView.as_view(), name='sale'),

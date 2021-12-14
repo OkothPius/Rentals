@@ -51,3 +51,12 @@ class Sale(models.Model):
         # Handles redirect
     def get_absolute_url(self):
         return reverse('rental')
+
+class Message(models.Model):
+    text = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.text
+
+    def get_absolute_url(self):
+        return reverse('tenant_dashboard')

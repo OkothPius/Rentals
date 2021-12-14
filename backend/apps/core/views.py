@@ -15,7 +15,7 @@ from django.contrib.auth.models import User
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
-from .models import Rental, Sale
+from .models import Rental, Sale, Message
 from .render import Render
 from django.views.generic import (
                     ListView,
@@ -116,6 +116,16 @@ class SaleCreateView(CreateView):
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
+
+class MessageCreateView(CreateView):
+    model = Message
+    fields = ['text']
+
+    def form_valid(self, form):
+        form.instance.author = self.request.user
+        return super().form_valid(form)
+
+
 
 class SaleUpdateView(UserPassesTestMixin, SuccessMessageMixin, UpdateView):
     success_message ='Your Post have been Updated!'
