@@ -4,6 +4,7 @@ from PIL import Image
 
 class User(AbstractUser):
     """docstring for User."""
+    is_admin = models.BooleanField(default=False)
     is_agent = models.BooleanField(default=False)
     is_tenant = models.BooleanField(default=False)
 
