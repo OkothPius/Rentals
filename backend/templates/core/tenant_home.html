@@ -1,25 +1,47 @@
 {% extends 'core/base.html' %}
-
+{% load static %}
 {% block content %}
-<h2 class="text-center">Welcome our Esteem Tenant, We hope you find the house that excites you!</h2>
 
-<section>
+<section class="bg-grey py-3" style="background:grey;">
+  <h1 class="text-center">Welcome our Esteem Tenant, We hope you find the house that excites you!</h1>
+
   <div class="container">
-    {% for %}
+    <h1 class="mb-3">Houses for Rental</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for rental in rentals %}
+            <div class="col">
+              <div class="card">
+                <img src="{{ rental.image.url }}" class="card-img-top" alt="...">
+                <div class="card-body">
+                  <h5 class="card-title">{{ rental.name }} - {{ rental.rent }}</h5>
+                  <p class="card-text">{{ rental.house_detail }}</p>
+                </div>
+              </div>
+            </div>
+        {% endfor %}
+    </div>
+
+
+  <br>
+
+  <div class="container">
+    <h1 class="mb-3">Houses for Sale</h1>
+    {% for sale in sales %}
     <div class="row row-cols-1 row-cols-md-3 g-4">
       <div class="col">
         <div class="card">
-          <img src="..." class="card-img-top" alt="...">
+          <img src="{{ sale.image.url }}" class="card-img-top" alt="...">
           <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">This is a longer card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <h5 class="card-title">{{ sale.name }} - {{ sale.price }}</h5>
+            <p class="card-text">{{ sale.house_detail }}</p>
           </div>
         </div>
       </div>
   </div>
+  {% endfor %}
 
+  </div>
 </section>
-
 
 
 {% endblock content %}
