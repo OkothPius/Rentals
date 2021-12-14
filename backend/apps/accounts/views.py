@@ -8,17 +8,16 @@ from django.views.generic import CreateView
 from .models import User, Tenant, Agent, Profile
 from .forms import TenantSignUpForm, AgentSignUpForm, UserUpdateForm
 
-
-
 def register(request):
     return render(request, 'accounts/register.html')
-    
+
 def login_form(request):
 	return render(request, 'accounts/login.html')
 
 def logoutView(request):
 	logout(request)
 	return redirect('home')
+
 
 def loginView(request):
 	if request.method == 'POST':
