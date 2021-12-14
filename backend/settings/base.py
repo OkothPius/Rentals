@@ -102,11 +102,14 @@ TEMPLATES = [
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'rentals',
+        'USER': 'test_user',
+        'PASSWORD': 'pyglass',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
-
 
 # ==============================================================================
 # AUTHENTICATION AND AUTHORIZATION SETTINGS
