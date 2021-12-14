@@ -26,6 +26,9 @@ from django.views.generic import (
                     )
 import pdfkit
 
+def home(request):
+    return render(request, 'core/home.html')
+
 #Tenant View
 def home_tenant(request):
     # tenant = User.objects.filter(is_tenant=True)
