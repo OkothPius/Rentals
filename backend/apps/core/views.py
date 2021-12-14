@@ -28,7 +28,14 @@ import pdfkit
 
 #Tenant View
 def home_tenant(request):
-    tenant = User.objects.filter(is_tenant=True)
+    # tenant = User.objects.filter(is_tenant=True)
+    rentals = Rental.objects.all()
+    sales = Sale.objects.all()
+
+    context = {'rentals':rentals, 'sales':sales}
+    return render(request, 'core/tenant_home.html', context)
+
+
 
 class RentalListView(generic.ListView):
     models = Rental
