@@ -26,8 +26,10 @@ from django.views.generic import (
                     )
 import pdfkit
 
+#Tenant View
+def home_tenant(request):
+    tenant = User.objects.filter(is_tenant=True)
 
-# @login_required
 class RentalListView(generic.ListView):
     models = Rental
     template_name = 'core/index.html'
