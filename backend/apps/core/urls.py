@@ -21,12 +21,13 @@ urlpatterns = [
 
     #Authentication
 
-    #Agent URLS 
+    #Agent URLS
 
     #Tenant URLS
+    path('tenant_home', views.home_tenant, name='tenant_dashboard'),
 
     #Rental CRUD operations
-    path('', RentalListView.as_view(), name='rental'),
+    path('', RentalListView.as_view(), name='agent_dashboard'),
     path('rental/new/', RentalCreateView.as_view(), name='rental-create'),
     path('rental/<int:pk>/update/', RentalUpdateView.as_view(), name='rental-update'),
     path('rental/<int:pk>/delete/', RentalDeleteView.as_view(), name='rental-delete'),
