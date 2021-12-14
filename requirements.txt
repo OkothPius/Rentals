@@ -17,6 +17,8 @@ django-bulma==0.8.0
 django-crispy-forms==1.13.0
 django-debug-toolbar==3.2.2
 django-environ==0.8.1
+django-filter==21.1
+django-widget-tweaks==1.4.9
 docutils==0.18.1
 future==0.18.2
 html5lib==1.1
@@ -30,6 +32,7 @@ oauthlib==3.1.1
 pdfkit==0.6.1
 Pillow==8.4.0
 polyline==1.4.0
+psycopg2-binary==2.9.2
 pycparser==2.21
 PyJWT==2.3.0
 PyPDF2==1.26.0
