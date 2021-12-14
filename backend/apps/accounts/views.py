@@ -5,14 +5,36 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate, login
 from django.views.generic import CreateView
 
-from .models import User, Tenant
+from .models import User, Tenant, Agent, Profile
 from .forms import TenantSignUpForm, AgentSignUpForm, UserUpdateForm
 
 
 
-def register(request):
-    return render(request, 'accounts/register.html')
+def login_form(request):
+	return render(request, 'accounts/login.html')
 
+def logoutView(request):
+	logout(request)
+	return redirect('home')
+
+def loginView(request):
+	if request.method == 'POST':
+		username = request.POST['username']
+		password = request.POST['password']
+		user = authenticate(request, username=username, password=password)
+		if user is not None and user.is_active:
+			auth.login(request, user)
+			if user.is_admin or user.is_superuser:
+				return redirect('dashboard')
+			elif user.is_agent:
+			    return redirect('agent_dashboard')
+			elif user.is_learner:
+			    return redirect('tenant_dashboard')
+			else:
+			    return redirect('login_form')
+		else:
+		    messages.info(request, "Invalid Username or Password")
+		    return redirect('login_form')
 
 class TenantSignUpView(CreateView):
     model = User
@@ -26,8 +48,7 @@ class TenantSignUpView(CreateView):
     def form_valid(self, form):
         user = form.save()
         login(self.request, user)
-        return redirect('rental')
-
+        return redirect('home')
 
 class AgentSignUpView(CreateView):
     model = User
@@ -35,13 +56,46 @@ class AgentSignUpView(CreateView):
     template_name = 'accounts/signup.html'
 
     def get_context_data(self, **kwargs):
-        kwargs['user_type'] = 'agent'
+        kwargs['user_type'] = 'tenant'
         return super().get_context_data(**kwargs)
 
     def form_valid(self, form):
         user = form.save()
-        # login(self.request, user)
-        return redirect('rental')
+        login(self.request, user)
+        return redirect('home')
+
+# def register(request):
+#     return render(request, 'accounts/register.html')
+#
+#
+# class TenantSignUpView(CreateView):
+#     model = User
+#     form_class = TenantSignUpForm
+#     template_name = 'accounts/signup.html'
+#
+#     def get_context_data(self, **kwargs):
+#         kwargs['user_type'] = 'tenant'
+#         return super().get_context_data(**kwargs)
+#
+#     def form_valid(self, form):
+#         user = form.save()
+#         login(self.request, user)
+#         return redirect('rental')
+#
+#
+# class AgentSignUpView(CreateView):
+#     model = User
+#     form_class = AgentSignUpForm
+#     template_name = 'accounts/signup.html'
+#
+#     def get_context_data(self, **kwargs):
+#         kwargs['user_type'] = 'agent'
+#         return super().get_context_data(**kwargs)
+#
+#     def form_valid(self, form):
+#         user = form.save()
+#         # login(self.request, user)
+#         return redirect('rental')
 
 
 # def register(request):
@@ -82,39 +136,3 @@ def profile(request):
 
 def index(request):
     return render(request, 'accounts/index.html')
-#
-#
-# def register(request):
-#     msg = None
-#     if request.method == 'POST':
-#         form = SignUpForm(request.POST)
-#         if form.is_valid():
-#             user = form.save()
-#             msg = 'user created'
-#             return redirect('login_view')
-#         else:
-#             msg = 'form is not valid'
-#     else:
-#         form = SignUpForm()
-#     return render(request,'accounts/register.html', {'form': form, 'msg': msg})
-#
-#
-# def login_view(request):
-#     form = LoginForm(request.POST or None)
-#     msg = None
-#     if request.method == 'POST':
-#         if form.is_valid():
-#             username = form.cleaned_data.get('username')
-#             password = form.cleaned_data.get('password')
-#             user = authenticate(username=username, password=password)
-#             if user is not None and user.is_agent:
-#                 login(request, user)
-#                 return redirect('home')
-#             elif user is not None and user.is_user:
-#                 login(request, user)
-#                 return redirect('home')
-#             else:
-#                 msg= 'invalid credentials'
-#         else:
-#             msg = 'error validating form'
-#     return render(request, 'accounts/login.html', {'form': form, 'msg': msg})
