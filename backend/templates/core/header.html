@@ -26,18 +26,25 @@
     <div class="collapse navbar-collapse" id="navmenu">
       <ul class="navbar-nav ms-auto">
         {% if user.is_authenticated %}
-          <li class="nav-item">
-            <a href="{% url 'map'%}" class="nav-link"><i class="fas fa-map-marker-alt"></i> Map</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'sale' %}" class="nav-link">Buy</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'agent_dashboard' %}" class="nav-link">Rent</a>
-          </li>
-          <li class="nav-item">
-            <a href="{% url 'invoice:invoice-list' %}" class="nav-link"><i class="fa fa-heart"></i></a>
-          </li>
+          {% if user.is_tenant %}
+            <li class="nav-item">
+              <a href="{% url 'map'%}" class="nav-link"><i class="fas fa-map-marker-alt"></i> Map</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'tenant_dashboard'%}" class="nav-link"> Buy & Rent</a>
+            </li>
+          {% else %}
+            <li class="nav-item">
+              <a href="{% url 'sale' %}" class="nav-link">Buy</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'agent_dashboard' %}" class="nav-link">Rent</a>
+            </li>
+            <li class="nav-item">
+              <a href="{% url 'invoice:invoice-list' %}" class="nav-link"><i class="fa fa-heart"></i></a>
+            </li>
+          {% endif %}
+
           <li class="nav-item px-2">
             <a href="{% url 'profile' %}" class="btn btn-light"><i class="fas fa-user"></i></a>
           </li>
