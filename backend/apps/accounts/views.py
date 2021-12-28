@@ -65,6 +65,7 @@ class AgentSignUpView(CreateView):
         user = form.save()
         login(self.request, user)
         return redirect('agent_dashboard')
+        
 
 @login_required
 def profile(request):
