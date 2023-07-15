@@ -11,7 +11,7 @@ click-plugins==1.0.3
 cligj==0.4.0
 cryptography==36.0.0
 defusedxml==0.7.1
-Django==3.2.9
+Django==3.2.20
 django-bootstrap-datepicker-plus==3.0.5
 django-bulma==0.8.0
 django-crispy-forms==1.13.0
